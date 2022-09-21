@@ -191,6 +191,7 @@ img {
   position: fixed;
   left: 0;
   bottom: 0;
+  color: #503700;
 }
 .globalMain {
   background: rgba(255, 255, 255, 0.2);

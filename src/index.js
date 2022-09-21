@@ -142,11 +142,20 @@ $('.reButton').on('click',()=>{
     render()
 })
 
-$(document).on('keypress',(e)=>{
-    const {key} = e
-    for (let i = 0; i < hashMap.length; i++) {
-        if (hashMap[i].logo.toLowerCase()=== key.toLowerCase()) {
-             window.open(hashMap[i].url)
+$('input').focus(function (e) { 
+    e.preventDefault();
+    $(document).on('keypress',()=>{
+
+    })
+});
+$('input').blur(function (e) { 
+    e.preventDefault();
+    $(document).on('keypress',(e)=>{
+        const {key} = e
+        for (let i = 0; i < hashMap.length; i++) {
+            if (hashMap[i].logo.toLowerCase()=== key.toLowerCase()) {
+                 window.open(hashMap[i].url)
+            }
         }
-    }
-})
+    })
+});

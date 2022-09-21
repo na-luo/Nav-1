@@ -9941,14 +9941,21 @@ $('.reButton').on('click', function () {
   }];
   render();
 });
-$(document).on('keypress', function (e) {
-  var key = e.key;
+$('input').focus(function (e) {
+  e.preventDefault();
+  $(document).on('keypress', function () {});
+});
+$('input').blur(function (e) {
+  e.preventDefault();
+  $(document).on('keypress', function (e) {
+    var key = e.key;
 
-  for (var i = 0; i < hashMap.length; i++) {
-    if (hashMap[i].logo.toLowerCase() === key.toLowerCase()) {
-      window.open(hashMap[i].url);
+    for (var i = 0; i < hashMap.length; i++) {
+      if (hashMap[i].logo.toLowerCase() === key.toLowerCase()) {
+        window.open(hashMap[i].url);
+      }
     }
-  }
+  });
 });
 },{"./jquery.js":"ZC2X"}]},{},["Focm"], null)
-//# sourceMappingURL=src.2c7c21a3.js.map
+//# sourceMappingURL=src.4c3d7278.js.map
