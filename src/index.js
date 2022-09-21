@@ -1,4 +1,4 @@
-import jquery from 'jquery'
+import jquery from './jquery.js'
 let $ = jquery
 const $siteList = $('.siteList')
 const $lastLi = $siteList.find('li.last')
