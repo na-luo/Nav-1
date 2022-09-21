@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    caret-color: transparent;
 }
 *:before, *:after{
     box-sizing: border-box;
@@ -14,6 +15,14 @@ a{
     text-decoration: none;
 
 }
+body{
+    background: rgb(63,94,251);
+    background: linear-gradient(90deg, 
+        rgba(63,94,251,1) 0%, 
+        rgba(177,98,255,1) 29%,
+        rgba(235,121,178,1) 66%,
+        rgba(252,39,39,1) 100%);
+}
 img{
     max-width: 100%;
 }
@@ -22,27 +31,37 @@ img{
     .searchForm{
         display: flex;
         justify-content: space-between;
+        caret-color:transparent;
         input{
             width: 100%;
-            margin-right: 10px;
-            height: 40px;
+            margin-right: 13px;
+            height: 45px;
             padding: 0 10px;
-            border-radius:4px;
+            border-radius:8px;
             border: 1px solid #ddd;
+            caret-color:black;
+            font-size: 18px;
+            
         }
         button{
             white-space: nowrap;
             padding: 0 28px;
-            border-radius:4px;
+            border-radius:6px;
             color: white;
-            background: #0282B9;
+            background: #019de0;
             border: none;
-            font-size: 16px;
+            font-size: 17px;
+            cursor: pointer;
         }
+        button:hover{
+            background: #0082b9;
+            color: rgb(215, 218, 255);
+        }
+        
     }
     @media (min-width:500px) {
         .searchForm{
-            max-width: 560px;
+            max-width: 580px;
             margin-left:auto;
             margin-right:auto;
         }
@@ -59,14 +78,14 @@ img{
     }
 }
 .globalMain{
-    max-width: 900px;
+    max-width: 940px;
     margin-left:auto;
     margin-right:auto;
-
+    background: white;
+    padding: 20px;
     .siteList{
         display: flex;
         flex-wrap: wrap;
-        margin: 20px;
         justify-content: space-between;   
         li{
             margin-bottom: 15px;
@@ -101,17 +120,32 @@ img{
             .link{
                 font-size: 14px;
                 margin-top: 4px;
+                word-wrap: inherit;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 100px;
             }
             .close{
                 position: absolute;
                 right: 10px;
                 top: 5px;
-                font-size: 15px;
+                font-size: 18px;
+                display: none;
+            }
+            .change{
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+                font-size: 18px;
                 display: none;
             }
         }
         .site:hover{
             .close{
+                display: block;
+            }
+            .change{
                 display: block;
             }
         }
@@ -124,6 +158,7 @@ img{
             border: 1px solid #ddd;
             padding: 20px 0;
             border-radius:  4px;
+            background: white;
             cursor: pointer;
             .icon-wrapper{
                 width: 67px;
@@ -154,4 +189,27 @@ img{
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+
  }
+ /*
+ 测试中
+ */
+.reButton{
+    font-size: 14px;
+    background-color: rgb(248, 248, 248);
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.globalMain{
+    background: rgba(255, 255, 255, 0.2);   
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow:inset 0 0 6px rgba(255, 255, 255, 0.2);
+}

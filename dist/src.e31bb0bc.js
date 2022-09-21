@@ -11257,31 +11257,21 @@ var hashMap = xObject || [{
   logoType: 'text',
   url: 'http://www.acfun.cn'
 }, {
-  logo: 'http://localhost:1234/src/images/bilibili.png',
+  logo: './src/images/bilibili.png',
   logoType: 'image',
   url: 'http://www.bilibili.com'
 }];
 
 var render = function render() {
   $siteList.find('li:not(.last)').remove();
-  hashMap.forEach(function (node, index) {
-    var $li;
-
+  hashMap.forEach(function (node) {
     if (node.logoType === 'text') {
-      $li = $("\n            <li>               \n                    <div class=\"site\">\n                        <div class=\"logo\">".concat(node.logo, "</div>\n                        <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                        <div class=\"close\">\n                            <svg class=\"icon\">\n                                <use xlink:href=\"#icon-guanbi\"></use>\n                            </svg>\n                        </div>\n                    </div>\n            </li>\n            ")).insertBefore($lastLi);
+      var $li = $("\n            <li>               \n                    <div class=\"site\">\n                        <div class=\"logo\">".concat(node.logo, "</div>\n                        <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                        <div class=\"close\">\n                            <svg class=\"icon\">\n                                <use xlink:href=\"#icon-guanbi\"></use>\n                            </svg>\n                        </div>\n                        <div class=\"change\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-xiugai\"></use>\n                        </svg>\n                    </div>\n                    </div>\n            </li>\n            ")).insertBefore($lastLi);
     } else if (node.logoType === 'image') {
-      $li = $("\n            <li>\n                <div class=\"site\">\n                    <div class=\"logo\">\n                        <img src=\"".concat(node.logo, "\" alt=\"\">\n                    </div>\n                    <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                    <div class=\"close\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-guanbi\"></use>\n                        </svg>\n                    </div>\n                </div>\n            </li>\n            ")).insertBefore($lastLi);
+      var _$li = $("\n            <li>\n                <div class=\"site\">\n                    <div class=\"logo\">\n                        <img src=\"\" alt=\"\">\n                    </div>\n                    <div class=\"link\">".concat(simplifyUrl(node.url), "</div>\n                    <div class=\"close\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-guanbi\"></use>\n                        </svg>\n                    </div>\n                    <div class=\"change\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-xiugai\"></use>\n                        </svg>\n                    </div>\n                </div>\n            </li>\n            ")).insertBefore($lastLi);
+
+      $('.logo img').attr('src', '/bilibili.66c0ad06.png');
     }
-
-    $li.on('click', function () {
-      window.open(node.url);
-    });
-    $li.on('click', '.close', function (e) {
-      e.stopPropagation(); //阻止冒泡
-
-      hashMap.splice(index, 1);
-      render();
-    });
   });
 };
 
@@ -11289,20 +11279,67 @@ var simplifyUrl = function simplifyUrl(url) {
   return url.replace('https://', '').replace('http://', '').replace('www.', '').replace('/\/.*/', '');
 };
 
-render();
+render(); // 添加网站
+
 $('.addButton').on('click', function () {
   var url = window.prompt('请问你要添加的网址是啥');
 
-  if (url.indexOf('http') !== 0) {
-    url = 'http://' + url;
+  if (url !== null) {
+    if (url.indexOf('http') !== 0) {
+      url = 'http://' + url;
+      var firstUrl = simplifyUrl(url)[0].toUpperCase();
+      hashMap.push({
+        logo: firstUrl,
+        logoType: 'text',
+        url: url
+      });
+    }
   }
 
-  var firstUrl = simplifyUrl(url)[0].toUpperCase();
-  hashMap.push({
-    logo: firstUrl,
-    logoType: 'text',
-    url: url
+  render();
+}); // 委托点击条件事件
+
+$('.globalMain').on('click', '.site', 'div', function (e) {
+  var $link = $(e.currentTarget).find('.link');
+  hashMap.forEach(function (item) {
+    if (simplifyUrl(item.url) === $link.text()) {
+      window.open(item.url);
+    }
   });
+}); // 委托关闭事件
+
+$('.globalMain').on('click', '.close', 'div', function (e) {
+  e.stopPropagation(); //阻止冒泡
+
+  var $link = $(e.currentTarget).parent().find('.link');
+  hashMap.forEach(function (item, index) {
+    if (simplifyUrl(item.url) === $link.text()) {
+      hashMap.splice(index, 1);
+    }
+  });
+  render();
+}); //委托改变网站事件
+
+$('.globalMain').on('click', '.change', 'div', function (e) {
+  e.stopPropagation();
+  e.preventDefault();
+  var $link = $(e.currentTarget).parent().find('.link');
+  var url = window.prompt('请问你要修改的网址是啥?');
+
+  if (url === '') {
+    url = $link.text();
+  } else if (url !== null) {
+    if (url.indexOf('http') !== 0) {
+      url = 'http://' + url;
+      hashMap.forEach(function (item) {
+        if (simplifyUrl(item.url) === $link.text()) {
+          item.url = url;
+          item.logo = simplifyUrl(url)[0].toUpperCase();
+        }
+      });
+    }
+  }
+
   render();
 }); //页面关闭时候触发
 
@@ -11317,7 +11354,7 @@ $('.reButton').on('click', function () {
     logoType: 'text',
     url: 'http://www.acfun.cn'
   }, {
-    logo: './images/bilibili.png',
+    logo: './src/images/bilibili.png',
     logoType: 'image',
     url: 'http://www.bilibili.com'
   }];
@@ -11327,7 +11364,7 @@ $(document).on('keypress', function (e) {
   var key = e.key;
 
   for (var i = 0; i < hashMap.length; i++) {
-    if (hashMap[i].logo.toLowerCase() === key) {
+    if (hashMap[i].logo.toLowerCase() === key.toLowerCase()) {
       window.open(hashMap[i].url);
     }
   }
@@ -11360,7 +11397,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2662" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1267" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

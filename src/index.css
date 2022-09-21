@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  caret-color: transparent;
 }
 *:before,
 *:after {
@@ -15,6 +16,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+body {
+  background: #3f5efb;
+  background: linear-gradient(90deg, #3f5efb 0%, #b162ff 29%, #eb79b2 66%, #fc2727 100%);
+}
 img {
   max-width: 100%;
 }
@@ -24,27 +29,35 @@ img {
 .globalHeader .searchForm {
   display: flex;
   justify-content: space-between;
+  caret-color: transparent;
 }
 .globalHeader .searchForm input {
   width: 100%;
-  margin-right: 10px;
-  height: 40px;
+  margin-right: 13px;
+  height: 45px;
   padding: 0 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid #ddd;
+  caret-color: black;
+  font-size: 18px;
 }
 .globalHeader .searchForm button {
   white-space: nowrap;
   padding: 0 28px;
-  border-radius: 4px;
+  border-radius: 6px;
   color: white;
-  background: #0282B9;
+  background: #019de0;
   border: none;
-  font-size: 16px;
+  font-size: 17px;
+  cursor: pointer;
+}
+.globalHeader .searchForm button:hover {
+  background: #0082b9;
+  color: #d7daff;
 }
 @media (min-width: 500px) {
   .globalHeader .searchForm {
-    max-width: 560px;
+    max-width: 580px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -55,14 +68,15 @@ img {
   }
 }
 .globalMain {
-  max-width: 900px;
+  max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+  background: white;
+  padding: 20px;
 }
 .globalMain .siteList {
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
   justify-content: space-between;
 }
 .globalMain .siteList li {
@@ -97,15 +111,30 @@ img {
 .globalMain .siteList .site .link {
   font-size: 14px;
   margin-top: 4px;
+  word-wrap: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100px;
 }
 .globalMain .siteList .site .close {
   position: absolute;
   right: 10px;
   top: 5px;
-  font-size: 15px;
+  font-size: 18px;
+  display: none;
+}
+.globalMain .siteList .site .change {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  font-size: 18px;
   display: none;
 }
 .globalMain .siteList .site:hover .close {
+  display: block;
+}
+.globalMain .siteList .site:hover .change {
   display: block;
 }
 .globalMain .siteList .addButton {
@@ -117,6 +146,7 @@ img {
   border: 1px solid #ddd;
   padding: 20px 0;
   border-radius: 4px;
+  background: white;
   cursor: pointer;
 }
 .globalMain .siteList .addButton .icon-wrapper {
@@ -146,4 +176,26 @@ img {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+/*
+ 测试中
+ */
+.reButton {
+  font-size: 14px;
+  background-color: #f8f8f8;
+  border: none;
+  padding: 8px;
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.globalMain {
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2);
 }
