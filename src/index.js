@@ -6,14 +6,15 @@ const x = localStorage.getItem('x')
 const xObject = JSON.parse(x)
 
 let hashMap = xObject || [
-    {logo:'A',logoType:'text',url:'http://www.acfun.cn'},
-    {logo:'./src/images/bilibili.png',logoType:'image',url:'http://www.bilibili.com'},
+    {logo:'A',url:'http://www.acfun.cn'},
+    {logo:'B',url:'http://www.bilibili.com'},
+    {logo:'M',url:'https://developer.mozilla.org'},
+    {logo:'W',url:'https://www.w3school.com.cn/index.html'},
 ]
 
 const render = ()=>{
     $siteList.find('li:not(.last)').remove()
-    hashMap.forEach((node)=>{
-        if (node.logoType === 'text') {      
+    hashMap.forEach((node)=>{  
             let $li = $(`
             <li>               
                     <div class="site">
@@ -32,29 +33,29 @@ const render = ()=>{
                     </div>
             </li>
             `).insertBefore($lastLi)
-        }else if (node.logoType === 'image') {
-            let $li = $(`
-            <li>
-                <div class="site">
-                    <div class="logo">
-                        <img src="" alt="">
-                    </div>
-                    <div class="link">${simplifyUrl(node.url)}</div>
-                    <div class="close">
-                        <svg class="icon">
-                            <use xlink:href="#icon-guanbi"></use>
-                        </svg>
-                    </div>
-                    <div class="change">
-                        <svg class="icon">
-                            <use xlink:href="#icon-xiugai"></use>
-                        </svg>
-                    </div>
-                </div>
-            </li>
-            `).insertBefore($lastLi)
-            $('.logo img').attr('src','/bilibili.66c0ad06.png')
-        }
+        // }else if (node.logoType === 'image') {
+        //     let $li = $(`
+        //     <li>
+        //         <div class="site">
+        //             <div class="logo">
+        //                 <img src="${node.logo}" alt="">
+        //             </div>
+        //             <div class="link">${simplifyUrl(node.url)}</div>
+        //             <div class="close">
+        //                 <svg class="icon">
+        //                     <use xlink:href="#icon-guanbi"></use>
+        //                 </svg>
+        //             </div>
+        //             <div class="change">
+        //                 <svg class="icon">
+        //                     <use xlink:href="#icon-xiugai"></use>
+        //                 </svg>
+        //             </div>
+        //         </div>
+        //     </li>
+        //     `).insertBefore($lastLi)
+        //     // $('.logo img').attr('src','/bilibili.66c0ad06.png')
+        // }
     })
 }
 const simplifyUrl = (url)=>{
@@ -133,8 +134,10 @@ window.onbeforeunload = ()=>{
 }
 $('.reButton').on('click',()=>{
     hashMap = [
-        {logo:'A',logoType:'text',url:'http://www.acfun.cn'},
-        {logo:'./src/images/bilibili.png',logoType:'image',url:'http://www.bilibili.com'},
+        {logo:'A',url:'http://www.acfun.cn'},
+        {logo:'B',url:'http://www.bilibili.com'},
+        {logo:'M',url:'https://developer.mozilla.org'},
+        {logo:'W',url:'https://www.w3school.com.cn/index.html'},
     ]
     render()
 })

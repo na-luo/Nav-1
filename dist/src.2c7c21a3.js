@@ -9811,24 +9811,44 @@ var x = localStorage.getItem('x');
 var xObject = JSON.parse(x);
 var hashMap = xObject || [{
   logo: 'A',
-  logoType: 'text',
   url: 'http://www.acfun.cn'
 }, {
-  logo: './src/images/bilibili.png',
-  logoType: 'image',
+  logo: 'B',
   url: 'http://www.bilibili.com'
+}, {
+  logo: 'M',
+  url: 'https://developer.mozilla.org'
+}, {
+  logo: 'W',
+  url: 'https://www.w3school.com.cn/index.html'
 }];
 
 var render = function render() {
   $siteList.find('li:not(.last)').remove();
   hashMap.forEach(function (node) {
-    if (node.logoType === 'text') {
-      var $li = $("\n            <li>               \n                    <div class=\"site\">\n                        <div class=\"logo\">".concat(node.logo, "</div>\n                        <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                        <div class=\"close\">\n                            <svg class=\"icon\">\n                                <use xlink:href=\"#icon-guanbi\"></use>\n                            </svg>\n                        </div>\n                        <div class=\"change\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-xiugai\"></use>\n                        </svg>\n                    </div>\n                    </div>\n            </li>\n            ")).insertBefore($lastLi);
-    } else if (node.logoType === 'image') {
-      var _$li = $("\n            <li>\n                <div class=\"site\">\n                    <div class=\"logo\">\n                        <img src=\"\" alt=\"\">\n                    </div>\n                    <div class=\"link\">".concat(simplifyUrl(node.url), "</div>\n                    <div class=\"close\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-guanbi\"></use>\n                        </svg>\n                    </div>\n                    <div class=\"change\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-xiugai\"></use>\n                        </svg>\n                    </div>\n                </div>\n            </li>\n            ")).insertBefore($lastLi);
-
-      $('.logo img').attr('src', '/bilibili.66c0ad06.png');
-    }
+    var $li = $("\n            <li>               \n                    <div class=\"site\">\n                        <div class=\"logo\">".concat(node.logo, "</div>\n                        <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                        <div class=\"close\">\n                            <svg class=\"icon\">\n                                <use xlink:href=\"#icon-guanbi\"></use>\n                            </svg>\n                        </div>\n                        <div class=\"change\">\n                        <svg class=\"icon\">\n                            <use xlink:href=\"#icon-xiugai\"></use>\n                        </svg>\n                    </div>\n                    </div>\n            </li>\n            ")).insertBefore($lastLi); // }else if (node.logoType === 'image') {
+    //     let $li = $(`
+    //     <li>
+    //         <div class="site">
+    //             <div class="logo">
+    //                 <img src="${node.logo}" alt="">
+    //             </div>
+    //             <div class="link">${simplifyUrl(node.url)}</div>
+    //             <div class="close">
+    //                 <svg class="icon">
+    //                     <use xlink:href="#icon-guanbi"></use>
+    //                 </svg>
+    //             </div>
+    //             <div class="change">
+    //                 <svg class="icon">
+    //                     <use xlink:href="#icon-xiugai"></use>
+    //                 </svg>
+    //             </div>
+    //         </div>
+    //     </li>
+    //     `).insertBefore($lastLi)
+    //     // $('.logo img').attr('src','/bilibili.66c0ad06.png')
+    // }
   });
 };
 
@@ -9908,12 +9928,16 @@ window.onbeforeunload = function () {
 $('.reButton').on('click', function () {
   hashMap = [{
     logo: 'A',
-    logoType: 'text',
     url: 'http://www.acfun.cn'
   }, {
-    logo: './src/images/bilibili.png',
-    logoType: 'image',
+    logo: 'B',
     url: 'http://www.bilibili.com'
+  }, {
+    logo: 'M',
+    url: 'https://developer.mozilla.org'
+  }, {
+    logo: 'W',
+    url: 'https://www.w3school.com.cn/index.html'
   }];
   render();
 });
@@ -9927,4 +9951,4 @@ $(document).on('keypress', function (e) {
   }
 });
 },{"./jquery.js":"ZC2X"}]},{},["Focm"], null)
-//# sourceMappingURL=src.eb3fa4f4.js.map
+//# sourceMappingURL=src.2c7c21a3.js.map

@@ -184,11 +184,11 @@ img {
   font-size: 14px;
   background-color: #f8f8f8;
   border: none;
-  padding: 8px;
+  padding: 6px;
   border-radius: 3px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
 }
@@ -201,4 +201,4 @@ img {
 }
 
 
-/*# sourceMappingURL=src.f44b0e4f.css.map */
+/*# sourceMappingURL=src.492ca33d.css.map */
